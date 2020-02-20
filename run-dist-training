@@ -1,0 +1,10 @@
+mpirun -np 2 -H localhost:1,172.31.28.252:1 \
+       -mca plm_rsh_no_tree_spawn 1 -bind-to socket -map-by slot \
+       -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib \
+       -mca btl_tcp_if_exclude lo,docker0 \
+       /home/ubuntu/anaconda3/envs/tensorflow_p36/bin/python ~/datasets/demo/cifar10-multi-gpu-horovod.py \
+       --batch-size 128 --epochs 30 --optimizer sgd \
+       --train ~/datasets/cifar10/train \
+       --eval ~/datasets/cifar10/eval \
+       --validation ~/datasets/cifar10/validation \
+       --output_data_dir ~/datasets/output/ --tensorboard_dir ~/datasets/output/
