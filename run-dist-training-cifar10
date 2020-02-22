@@ -1,4 +1,4 @@
-mpirun -np 2 -H localhost:1,172.31.28.252:1 \
+mpirun -np 2 -H localhost:1,<PRIVATE_IP_ADDR>:1 \
        -mca plm_rsh_no_tree_spawn 1 -bind-to socket -map-by slot \
        -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib \
        -mca btl_tcp_if_exclude lo,docker0 \
