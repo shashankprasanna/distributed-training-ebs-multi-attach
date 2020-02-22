@@ -1,0 +1,7 @@
+mpirun -np 16 -H localhost:8, <PRIVATE_IP_ADDR>:8 \
+       -mca plm_rsh_no_tree_spawn 1 -bind-to socket -map-by slot \
+       -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib \
+       -mca btl_tcp_if_exclude lo,docker0 \
+       /home/ubuntu/anaconda3/envs/tensorflow_p36/bin/python -W ignore ~/examples/horovod/tensorflow/train_imagenet_resnet_hvd.py \
+        --data_dir ~/data/tf-imagenet/ --num_epochs 90 -b 256 \
+        --lr_decay_mode poly --warmup_epochs 10 --clear_log
